@@ -3,161 +3,237 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Book Appointment - Lilium Lashes</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <title>Lilium Lashes - Book Appointment</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-    :root {
-      --lavender: #c8a2c8;
-      --soft-grey: #f1f1f1;
-      --deep-grey: #666;
+    /* Fade transition styles */
+    #page-content {
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    #page-content.fade-in {
+      opacity: 1;
+    }
+    #page-content.fade-out {
+      opacity: 0;
     }
 
     body {
-      background-color: white;
-      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f9f7fc;
+      color: #4b3b66;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
     }
-
-    .navbar {
-      background-color: var(--lavender);
+    nav {
+      background-color: #c5a3ff; /* lavender */
     }
-
-    .navbar-brand, .nav-link {
-      color: white !important;
-      font-weight: bold;
-    }
-
-    .booking-section {
-      max-width: 600px;
-      margin: 3rem auto;
-      background-color: var(--soft-grey);
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    h2.section-title {
-      color: var(--lavender);
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid var(--lavender);
-      padding-bottom: 0.5rem;
-    }
-
-    label {
+    nav a {
+      color: white;
       font-weight: 600;
-      color: var(--deep-grey);
+    }
+    nav a:hover {
+      color: #d3c1ff;
     }
 
-    input, select, textarea {
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      padding: 0.5rem;
-      font-size: 1rem;
+    main {
+      max-width: 600px;
+      margin: 2rem auto 4rem auto;
+      background: white;
+      border-radius: 12px;
+      padding: 2rem 3rem;
+      box-shadow: 0 6px 12px rgba(75, 59, 102, 0.15);
+    }
+
+    h1 {
+      font-family: 'Brush Script MT', cursive, sans-serif;
+      font-size: 3rem;
+      color: #6e56cf;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    form label {
+      font-weight: 600;
+      margin-top: 1rem;
+      display: block;
+      color: #5e4bb7;
+    }
+    form input,
+    form select,
+    form textarea {
       width: 100%;
-      margin-bottom: 1rem;
+      padding: 0.6rem 0.8rem;
+      border: 1.5px solid #c5a3ff;
+      border-radius: 8px;
+      margin-top: 0.3rem;
+      font-size: 1rem;
+      font-family: inherit;
+      color: #4b3b66;
       transition: border-color 0.3s ease;
     }
-
-    input:focus, select:focus, textarea:focus {
+    form input:focus,
+    form select:focus,
+    form textarea:focus {
+      border-color: #6e56cf;
       outline: none;
-      border-color: var(--lavender);
-      box-shadow: 0 0 5px var(--lavender);
     }
 
-    button.btn-primary {
-      background-color: var(--lavender);
+    button[type="submit"] {
+      margin-top: 2rem;
+      background-color: #6e56cf;
+      color: white;
       border: none;
-      padding: 0.75rem 1.5rem;
-      font-weight: bold;
-      border-radius: 8px;
+      border-radius: 10px;
+      padding: 0.8rem 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 700;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      width: 100%;
+    }
+    button[type="submit"]:hover {
+      background-color: #5e44b2;
     }
 
-    button.btn-primary:hover {
-      background-color: #b18bb1;
+    .confirmation-message {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #6e56cf;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 650px) {
+      main {
+        margin: 1rem 1rem 3rem 1rem;
+        padding: 1.5rem 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
+  <div id="page-content">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand text-white fw-bold" href="index.html">Lilium Lashes</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link active" href="book.html">Book</a></li>
+            <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
-  <div class="container">
-    <a class="navbar-brand" href="index.html">Lilium Lashes</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon bg-light"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
-        <li class="nav-item"><a class="nav-link active" href="book.html">Book</a></li>
-      </ul>
-    </div>
+    <!-- Main content -->
+    <main>
+      <h1>Book an Appointment</h1>
+      <form id="booking-form" novalidate>
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required aria-required="true" autocomplete="name" />
+
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required aria-required="true" autocomplete="email" />
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" />
+
+        <label for="service">Select Service *</label>
+        <select id="service" name="service" required aria-required="true">
+          <option value="" disabled selected>Select a service</option>
+          <option value="Classic Full Set">Classic Full Set - $120</option>
+          <option value="Classic Fill">Classic Fill - $75</option>
+          <option value="Hybrid Full Set">Hybrid Full Set - $150</option>
+          <option value="Hybrid Fill">Hybrid Fill - $90</option>
+          <option value="Volume Full Set">Volume Full Set - $180</option>
+          <option value="Volume Fill">Volume Fill - $105</option>
+          <option value="Mega Volume Full Set">Mega Volume Full Set - $250</option>
+          <option value="Mega Fill">Mega Fill - $130</option>
+          <option value="Removal">Removal - $15</option>
+        </select>
+
+        <label for="date">Preferred Appointment Date *</label>
+        <input type="date" id="date" name="date" required aria-required="true" min="" />
+
+        <label for="notes">Additional Notes</label>
+        <textarea id="notes" name="notes" rows="3" placeholder="Any preferences or questions?"></textarea>
+
+        <button type="submit">Submit</button>
+
+        <div id="confirmation" class="confirmation-message" role="alert" aria-live="polite"></div>
+      </form>
+    </main>
   </div>
-</nav>
 
-<!-- Booking Section -->
-<section class="booking-section">
-  <h2 class="section-title">Book an Appointment</h2>
-  <form id="bookingForm" action="#" method="POST">
-    <label for="fullName">Full Name</label>
-    <input type="text" id="fullName" name="fullName" placeholder="Your full name" required />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <label for="email">Email Address</label>
-    <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
+  <script>
+    // Fade in on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const content = document.getElementById('page-content');
+      content.classList.add('fade-in');
 
-    <label for="service">Service</label>
-    <select id="service" name="service" required>
-      <option value="">Select a service</option>
-      <option value="classic">Classic Lash Extensions</option>
-      <option value="volume">Volume Lash Extensions</option>
-      <option value="hybrid">Hybrid Lash Extensions</option>
-      <option value="removal">Lash Removal</option>
-    </select>
+      // Set min date to today for date input
+      const dateInput = document.getElementById('date');
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+    });
 
-    <label for="date">Date</label>
-    <input type="date" id="date" name="date" required />
+    // Fade out on link click then navigate
+    const links = document.querySelectorAll('a[href]:not([target="_blank"])');
 
-    <label for="time">Time</label>
-    <select id="time" name="time" required>
-      <option value="">Select a time</option>
-      <option value="09:00">9:00 AM</option>
-      <option value="10:00">10:00 AM</option>
-      <option value="11:00">11:00 AM</option>
-      <option value="12:00">12:00 PM</option>
-      <option value="13:00">1:00 PM</option>
-      <option value="14:00">2:00 PM</option>
-      <option value="15:00">3:00 PM</option>
-      <option value="16:00">4:00 PM</option>
-    </select>
+    links.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (!href.startsWith('#') && href !== '') {
+          e.preventDefault();
+          const content = document.getElementById('page-content');
+          content.classList.remove('fade-in');
+          content.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = href;
+          }, 800);
+        }
+      });
+    });
 
-    <button type="submit" class="btn btn-primary w-100">Confirm Booking</button>
-  </form>
-</section>
+    // Form submission handling
+    const form = document.getElementById('booking-form');
+    const confirmation = document.getElementById('confirmation');
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Auto-fill date if passed in URL
-    const params = new URLSearchParams(window.location.search);
-    const dateParam = params.get('date');
-    if (dateParam) {
-      const dateInput = document.querySelector('input[name="date"]');
-      if (dateInput) {
-        dateInput.value = dateParam;
-      }
-    }
-
-    // Placeholder: handle form submission
-    const form = document.getElementById('bookingForm');
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      alert('Booking confirmed! (This is a demo alert. Integrate backend for real bookings.)');
-      form.reset();
-    });
-  });
-</script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      // Simple validation
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Simulate submission and confirmation
+      confirmation.textContent = 'Submitting your appointment...';
+
+      // Simulate a delay, e.g. backend request
+      setTimeout(() => {
+        confirmation.textContent = 'Thank you! Your appointment request has been received. We will contact you shortly.';
+        form.reset();
+      }, 1200);
+    });
+  </script>
 </body>
 </html>
