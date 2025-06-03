@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lilium Lashes</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
       background-color: #ffffff;
@@ -18,6 +19,16 @@
     .navbar-brand, .nav-link {
       font-weight: 600;
       color: #5a5a5a !important;
+    }
+
+    .navbar-brand {
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    .instagram-icon {
+      font-size: 1.5rem;
+      color: #5a5a5a;
     }
 
     .hero img {
@@ -86,16 +97,39 @@
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">9140 Westview Rd. Unit 137, Lone Tree, Colorado</a>
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <!-- Left: Address as brand -->
+      <a
+        class="navbar-brand"
+        href="https://www.google.com/maps/place/9140+Westview+Rd+Unit+137,+Lone+Tree,+CO+80124"
+        target="_blank"
+        rel="noopener"
+        title="Open in Google Maps"
+      >
+        9140 Westview Rd. Unit 137, Lone Tree, Colorado
+      </a>
+
+      <!-- Center: Instagram icon -->
+      <a
+        href="https://www.instagram.com/liliumlash"
+        class="instagram-icon mx-3"
+        target="_blank"
+        rel="noopener"
+        aria-label="Visit Instagram"
+      >
+        <i class="fab fa-instagram"></i>
+      </a>
+
+      <!-- Right: Navigation links -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon bg-light"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
-          <li class="nav-item"><a class="nav-link" href="book.html">Booking</a></li>
+          <li class="nav-item"><a class="nav-link" href="book.html">Book</a></li>
         </ul>
       </div>
     </div>
@@ -128,22 +162,21 @@
         <div class="row g-4">
           <div class="col-md-6">
             <section class="services h-100">
-  <h2>Available Services</h2>
-  <ul>
-    <li><span>Classic Full Set</span><span>$120</span></li>
-    <li><span>Classic Fill</span><span>$75</span></li>
-    <li><span>Hybrid Full Set</span><span>$150</span></li>
-    <li><span>Hybrid Fill</span><span>$90</span></li>
-    <li><span>Volume Full Set</span><span>$180</span></li>
-    <li><span>Volume Fill</span><span>$105</span></li>
-    <li><span>Mega Volume Full Set</span><span>$250</span></li>
-    <li><span>Mega Fill</span><span>$130</span></li>
-    <li><span>Removal</span><span>$15</span></li>
-  </ul>
-  <p class="mt-3"><em>Color Lashes Available | Hand-Made Fans (Included with Hybrid, Volume, and Mega Volume)</em></p>
-  <p><em>Fill price is for 2 weeks. 1 and 3 week fills available.</em></p>
-</section>
-
+              <h2>Available Services</h2>
+              <ul>
+                <li><span>Classic Full Set</span><span>$120</span></li>
+                <li><span>Classic Fill</span><span>$75</span></li>
+                <li><span>Hybrid Full Set</span><span>$150</span></li>
+                <li><span>Hybrid Fill</span><span>$90</span></li>
+                <li><span>Volume Full Set</span><span>$180</span></li>
+                <li><span>Volume Fill</span><span>$105</span></li>
+                <li><span>Mega Volume Full Set</span><span>$250</span></li>
+                <li><span>Mega Fill</span><span>$130</span></li>
+                <li><span>Removal</span><span>$15</span></li>
+              </ul>
+              <p class="mt-3"><em>Color Lashes Available | Hand-Made Fans (Included with Hybrid, Volume, and Mega Volume)</em></p>
+              <p><em>Fill price is for 2 weeks. 1 and 3 week fills available.</em></p>
+            </section>
           </div>
           <div class="col-md-6">
             <section class="availability h-100">
@@ -165,88 +198,87 @@
 
   <!-- Calendar Script -->
   <script>
-  const availabilityDiv = document.getElementById('availability');
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth();
+    const availabilityDiv = document.getElementById('availability');
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
 
-  function daysInMonth(year, month) {
-    return new Date(year, month + 1, 0).getDate();
-  }
-
-  function createCalendar(year, month) {
-    const table = document.createElement('table');
-    const headerRow = document.createElement('tr');
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-    days.forEach(day => {
-      const th = document.createElement('th');
-      th.textContent = day;
-      headerRow.appendChild(th);
-    });
-    table.appendChild(headerRow);
-
-    const firstDay = new Date(year, month, 1).getDay();
-    const totalDays = daysInMonth(year, month);
-    let date = 1;
-
-    for (let i = 0; i < 6; i++) {
-      const row = document.createElement('tr');
-      for (let j = 0; j < 7; j++) {
-        const cell = document.createElement('td');
-        if (i === 0 && j < firstDay || date > totalDays) {
-          cell.textContent = '';
-        } else {
-          const cellDate = new Date(year, month, date);
-          const dayOfWeek = cellDate.getDay();
-
-          cell.textContent = date;
-
-          // Past dates greyed out
-          if (cellDate < new Date().setHours(0, 0, 0, 0)) {
-            cell.style.color = '#bbb';
-          } 
-          // Disable Wednesdays
-          else if (dayOfWeek === 3) {
-            cell.style.color = '#ccc';
-            cell.style.backgroundColor = '#f0f0f0';
-            cell.style.cursor = 'not-allowed';
-            cell.title = 'Closed on Wednesdays';
-          } 
-          // Enable and enhance selectable days
-          else {
-            cell.style.cursor = 'pointer';
-            cell.title = 'From 8am–8pm';
-
-            cell.addEventListener('click', () => {
-              const y = cellDate.getFullYear();
-              const m = String(cellDate.getMonth() + 1).padStart(2, '0');
-              const d = String(cellDate.getDate()).padStart(2, '0');
-              const selectedDate = `${y}-${m}-${d}`;
-              window.location.href = `book.html?date=${selectedDate}`;
-            });
-
-            // Optional visual enhancement
-            cell.addEventListener('mouseover', () => {
-              cell.style.backgroundColor = '#f5ecff';
-            });
-            cell.addEventListener('mouseout', () => {
-              cell.style.backgroundColor = '';
-            });
-          }
-          date++;
-        }
-        row.appendChild(cell);
-      }
-      table.appendChild(row);
-      if (date > totalDays) break;
+    function daysInMonth(year, month) {
+      return new Date(year, month + 1, 0).getDate();
     }
-    return table;
-  }
 
-  availabilityDiv.appendChild(createCalendar(year, month));
-</script>
+    function createCalendar(year, month) {
+      const table = document.createElement('table');
+      const headerRow = document.createElement('tr');
+      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+      days.forEach(day => {
+        const th = document.createElement('th');
+        th.textContent = day;
+        headerRow.appendChild(th);
+      });
+      table.appendChild(headerRow);
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const totalDays = daysInMonth(year, month);
+      let date = 1;
+
+      for (let i = 0; i < 6; i++) {
+        const row = document.createElement('tr');
+        for (let j = 0; j < 7; j++) {
+          const cell = document.createElement('td');
+          if (i === 0 && j < firstDay || date > totalDays) {
+            cell.textContent = '';
+          } else {
+            const cellDate = new Date(year, month, date);
+            const dayOfWeek = cellDate.getDay();
+
+            cell.textContent = date;
+
+            // Past dates greyed out
+            if (cellDate < new Date().setHours(0, 0, 0, 0)) {
+              cell.style.color = '#bbb';
+            } 
+            // Disable Wednesdays
+            else if (dayOfWeek === 3) {
+              cell.style.color = '#ccc';
+              cell.style.backgroundColor = '#f0f0f0';
+              cell.style.cursor = 'not-allowed';
+              cell.title = 'Closed on Wednesdays';
+            } 
+            // Enable and enhance selectable days
+            else {
+              cell.style.cursor = 'pointer';
+              cell.title = 'From 8am–8pm';
+
+              cell.addEventListener('click', () => {
+                const y = cellDate.getFullYear();
+                const m = String(cellDate.getMonth() + 1).padStart(2, '0');
+                const d = String(cellDate.getDate()).padStart(2, '0');
+                const selectedDate = `${y}-${m}-${d}`;
+                window.location.href = `book.html?date=${selectedDate}`;
+              });
+
+              // Optional visual enhancement
+              cell.addEventListener('mouseover', () => {
+                cell.style.backgroundColor = '#f5ecff';
+              });
+              cell.addEventListener('mouseout', () => {
+                cell.style.backgroundColor = '';
+              });
+            }
+            date++;
+          }
+          row.appendChild(cell);
+        }
+        table.appendChild(row);
+        if (date > totalDays) break;
+      }
+      return table;
+    }
+
+    availabilityDiv.appendChild(createCalendar(year, month));
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
