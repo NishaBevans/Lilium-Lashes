@@ -165,63 +165,88 @@
 
   <!-- Calendar Script -->
   <script>
-    const availabilityDiv = document.getElementById('availability');
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth();
+  const availabilityDiv = document.getElementById('availability');
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
 
-    function daysInMonth(year, month) {
-      return new Date(year, month + 1, 0).getDate();
-    }
+  function daysInMonth(year, month) {
+    return new Date(year, month + 1, 0).getDate();
+  }
 
-    function createCalendar(year, month) {
-      const table = document.createElement('table');
-      const headerRow = document.createElement('tr');
-      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  function createCalendar(year, month) {
+    const table = document.createElement('table');
+    const headerRow = document.createElement('tr');
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-      days.forEach(day => {
-        const th = document.createElement('th');
-        th.textContent = day;
-        headerRow.appendChild(th);
-      });
-      table.appendChild(headerRow);
+    days.forEach(day => {
+      const th = document.createElement('th');
+      th.textContent = day;
+      headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
 
-      const firstDay = new Date(year, month, 1).getDay();
-      const totalDays = daysInMonth(year, month);
-      let date = 1;
+    const firstDay = new Date(year, month, 1).getDay();
+    const totalDays = daysInMonth(year, month);
+    let date = 1;
 
-      for (let i = 0; i < 6; i++) {
-        const row = document.createElement('tr');
-        for (let j = 0; j < 7; j++) {
-          const cell = document.createElement('td');
-          if (i === 0 && j < firstDay || date > totalDays) {
-            cell.textContent = '';
-          } else {
-            const cellDate = new Date(year, month, date);
-            if (cellDate < new Date().setHours(0, 0, 0, 0)) {
-              cell.textContent = date;
-              cell.style.color = '#bbb';
-            } else {
-              cell.textContent = date;
-              cell.addEventListener('click', () => {
-                const y = cellDate.getFullYear();
-                const m = String(cellDate.getMonth() + 1).padStart(2, '0');
-                const d = String(cellDate.getDate()).padStart(2, '0');
-                window.location.href = `book.html?date=${y}-${m}-${d}`;
-              });
-            }
-            date++;
+    for (let i = 0; i < 6; i++) {
+      const row = document.createElement('tr');
+      for (let j = 0; j < 7; j++) {
+        const cell = document.createElement('td');
+        if (i === 0 && j < firstDay || date > totalDays) {
+          cell.textContent = '';
+        } else {
+          const cellDate = new Date(year, month, date);
+          const dayOfWeek = cellDate.getDay();
+
+          cell.textContent = date;
+
+          // Past dates greyed out
+          if (cellDate < new Date().setHours(0, 0, 0, 0)) {
+            cell.style.color = '#bbb';
+          } 
+          // Disable Wednesdays
+          else if (dayOfWeek === 3) {
+            cell.style.color = '#ccc';
+            cell.style.backgroundColor = '#f0f0f0';
+            cell.style.cursor = 'not-allowed';
+            cell.title = 'Closed on Wednesdays';
+          } 
+          // Enable and enhance selectable days
+          else {
+            cell.style.cursor = 'pointer';
+            cell.title = 'From 8am–8pm';
+
+            cell.addEventListener('click', () => {
+              const y = cellDate.getFullYear();
+              const m = String(cellDate.getMonth() + 1).padStart(2, '0');
+              const d = String(cellDate.getDate()).padStart(2, '0');
+              const selectedDate = `${y}-${m}-${d}`;
+              window.location.href = `book.html?date=${selectedDate}`;
+            });
+
+            // Optional visual enhancement
+            cell.addEventListener('mouseover', () => {
+              cell.style.backgroundColor = '#f5ecff';
+            });
+            cell.addEventListener('mouseout', () => {
+              cell.style.backgroundColor = '';
+            });
           }
-          row.appendChild(cell);
+          date++;
         }
-        table.appendChild(row);
-        if (date > totalDays) break;
+        row.appendChild(cell);
       }
-      return table;
+      table.appendChild(row);
+      if (date > totalDays) break;
     }
+    return table;
+  }
 
-    availabilityDiv.appendChild(createCalendar(year, month));
-  </script>
+  availabilityDiv.appendChild(createCalendar(year, month));
+</script>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
